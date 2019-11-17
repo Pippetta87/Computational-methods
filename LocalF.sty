@@ -1,0 +1,158 @@
+\ProvidesPackage{LocalF}
+
+\newcommand{\iidrv}[1][X]{$#1_1,\ldots,#1_{n}$}
+\newcounter{columneqc}
+\stepcounter{equation}
+\newcommand\Label[1]{&\refstepcounter{columneqc}\ (\theequation.\thecolumneqc)\ltx@label{#1}&}
+
+\newcommand{\Exp}[1]{\text{exp}\{#1\}}
+\newcommand{\nmean}[2][N]{\bar{#2}_{#1}}
+\newcommand{\FT}{\xrightarrow{\mathcal{F}}}
+\newcommand{\mss}{modello solare standard}
+
+\makeatletter
+\newcommand{\crossout}[1]{%
+  \begingroup
+  \settowidth{\dimen@}{#1}%
+  \setlength{\unitlength}{0.05\dimen@}%
+  \settoheight{\dimen@}{#1}%
+  \count@=\dimen@
+  \divide\count@ by \unitlength
+  \count0=20 \count4=\count@
+  \loop
+  \count2=\count0 % keep a copy
+  \divide\count2\count4 \multiply\count2\count4
+  \ifnum\count2<\count0
+    \advance\count0 -\count2 % the remainder
+    \count2=\count0
+    \count0=\count4
+    \count4=\count2
+  \repeat
+  \count0=20 \divide\count0\count4
+  \count2=\count@ \divide\count2\count4
+  \begin{picture}(0,0)
+  \put(0,0){\line(\count0,\count2){20}}
+  \put(0,\count@){\line(\count0,-\count2){20}}
+  \end{picture}%
+  #1%
+  \endgroup
+}
+\makeatother
+
+\newenvironment{errata}[1][ ]%%%% errata
+{\refstepcounter{erratac}\adderratacontent{#1}%
+\begingroup {\theerratac: #1}
+\color{grey}
+}{\vspace{5mm}\noindent\rule{0.5\textwidth}{0.4pt}\\\endgroup}
+
+\ifx\status\keeptrying
+\newenvironment{wordonframe}[1]{\begin{frame}[allowframebreaks]{#1}}{\end{frame}}
+\else
+\newenvironment{wordonframe}[1]{\comment}{\endcomment}
+\fi
+
+%%% COUNTERS
+\newcounter{cherrykey}%conta le keyword totali per auto ref
+\newcounter{cherrysectionlist}% conta le key prima di keywordlist
+
+\newcommand\headinginfo[1]{%
+  \addcontentsline{key-\thecherrysectionlist}{heading}{{#1}}%
+  \addtocontents{key-\thecherrysectionlist}{\vspace{5pt}}}
+%% expert approach to keywords
+ \makeatletter
+\newcommand\keyword[2][target-\thecherrykey]{%
+\addtocounter{cherrykey}{1}
+\noindent{%
+\color{keyword}{#2}%
+}%
+\phantomsection% comment out if hyperref is not used
+  \linkdest{#1}%
+\addcontentsline{key-\thecherrysectionlist}{subsubsection}{\textbullet\protect\hyperlink{#1}{#2}}%
+}
+\makeatother
+  
+\makeatletter
+\newcommand{\listofkeywordsbasic}{%
+  \@starttocorig{key-\thecherrysectionlist}
+}
+%%frameintoc
+\newcommand\listofframes{\@starttoc{lbf}}
+\newcommand\listofframesname{List of keywords}
+\makeatother
+
+\newcommand\listkeywordsname{KEYWORDS}
+\newcommand\listofkeywords{%
+\subsubsection{\listkeywordsname}\listofkeywordsbasic}
+%%frameintoc
+\newcommand\frameintoc{%
+%\subsubsection{\insertframetitle}
+\addcontentsline{lbf}{section}{\protect\makebox[2em][l]{\insertframenumber\hfill}\insertframetitle\par}%
+}
+
+% \IfFileExists{key-\thecherrysublist}{false-branch}
+
+%\def\removespaces{\catcode`\ =9 t e}% Ignore all spaces`
+\def\trim#1{\ignorespaces#1\unskip}
+
+\newcommand{\sortedkeyword}[2][target-\thecherrykey]{%
+{2}\phantomsection\linkdest{#1}
+\DTLnewrow{adsottonove}% Create a new entry
+  \DTLnewdbentry{adsottonove}{description}{\hyperlink{#1}{#2}}% Add entry as description
+}
+
+\newenvironment{printsortedkeyword}{%
+\DTLifdbexists{adsottonove}{\DTLcleardb{adsottonove}}{\DTLnewdb{adsottonove}}% Create new/discard old list
+\noindent\rule{2cm}{0.4pt}
+
+}{%
+Keyword ADS 18/19:
+
+\DTLsort{description}{adsottonove}% Sort list
+%\begin{itemize}%
+    \DTLforeach*{adsottonove}{\theDesc=description}{%
+%\item
+\theDesc 
+%}% Print each item
+%\end{itemize}%  
+\noindent\rule{2cm}{0.4pt}
+}
+}
+
+\makeatletter
+\newcommand\transformxdimension[1]{
+	\pgfmathparse{((#1/\pgfplots@x@veclength)+\pgfplots@data@scale@trafo@SHIFT@x)/10^\pgfplots@data@scale@trafo@EXPONENT@x}
+}
+\newcommand\transformydimension[1]{
+	\pgfmathparse{((#1/\pgfplots@y@veclength)+\pgfplots@data@scale@trafo@SHIFT@y)/10^\pgfplots@data@scale@trafo@EXPONENT@y}
+}
+
+\newcommand\xcoord[2][center]{{%
+		\pgfpointanchor{#2}{#1}%
+		\pgfmathparse{\pgf@x/\pgf@xx}%
+		\pgfmathprintnumber{\pgfmathresult}%
+}}
+\newcommand\ycoord[2][center]{{%
+		\pgfpointanchor{#2}{#1}%
+		\pgfmathparse{\pgf@y/\pgf@yy}%
+		\pgfmathprintnumber{{\pgfmathresult}}%
+}}
+
+\newcommand\xcoordbis[2][center]{{%
+		% The actual point of interest
+		\pgfpointanchor{#2}{#1}%
+		\pgfgetlastxy{\ix}{\iy}%
+		% (0,0)
+		\pgfplotspointaxisxy{0}{0}%
+		\pgfgetlastxy{\ox}{\oy}
+		% (1,1)
+		\pgfplotspointaxisxy{1}{1}%
+		\pgfgetlastxy{\ux}{\uy}
+		\pgfmathparse{(\ix-\ox)/(\ux-\ox)}
+		\pgfmathprintnumber{\pgfmathresult}}
+}
+
+\def\markxof#1{
+	\pgf@process{#1}
+	\pgfmathparse{\pgf@x/\pgfplotsunitxlength +\pgfplots@data@scale@trafo@SHIFT@x)/10^\pgfplots@data@scale@trafo@EXPONENT@x}
+}
+\makeatother
