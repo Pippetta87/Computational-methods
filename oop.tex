@@ -1,0 +1,26 @@
+\documentclass[main.tex]{subfiles}
+ 
+\begin{document}
+
+\section{WTF is OOP?}
+
+\section{Python}
+
+\subsection{NumPy}
+
+\begin{frame}[fragile]{Stack}
+\begin{lstlisting}[language=Python]
+>>> a = np.array((1,2,3))
+>>> b = np.array((2,3,4))
+>>> np.hstack((a,b))
+array([1, 2, 3, 2, 3, 4])
+>>> a = np.array([[1],[2],[3]])
+>>> b = np.array([[2],[3],[4]])
+>>> np.hstack((a,b))
+array([[1, 2],
+       [2, 3],
+       [3, 4]])
+\end{lstlisting}
+\end{frame}
+
+\end{document}
