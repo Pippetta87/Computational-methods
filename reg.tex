@@ -1,12 +1,19 @@
 \section{RegLez 18/19}
 
+\begin{frame}[allowframebreaks]{Section TOC}
+%currentsection,hideallsubsections,subsubsectionstyle=hide
+\tableofcontents[currentsection,sectionstyle=show/hide,subsectionstyle=show/show/hide]%subsection created adding to toc as subsection
+\end{frame}
+
 \begin{frame}[allowframebreaks]{List of keywords}
 \listofkeywords
 \end{frame}
 
 \begin{frame}[allowframebreaks]{Reg Lez 19/20}
+
+\modulo{python and versioning}
 \begin{itemize}
-\item 23/09/2019 - lezione: Introduzione al corso. Il concetto di version control; version control locale, centralizzato e distribuito. Repositori, revisioni, tag. Funzioni di hashing e hashing in Python. Introduzione a git.
+\item 23/09/2019 - lezione: Introduzione al corso. Il concetto di version control; version control locale, centralizzato e distribuito. Repositori, revisioni, tag. Funzioni di \keyword{hashing} e hashing in Python. Introduzione a git.
 \item 23/09/2019 - esercitazione: Sessione hands-on su version control.
 \item 26/09/2019 - lezione: Introduzione a Python. Python 2 vs. Python 3; lo zen di Python; coding conventions. Variabili e tipi; formattazione delle stringhe. Funzioni; funzioni variadiche e keyword argument. Controllo del flusso. La rappresentazione dei numeri in virgola mobile e l'aritmetica in virgola mobile.
 \item 30/09/2019 - lezione: La libreria standard di Python. Meccanismo di import. Alcuni moduli della libraria standard: time, datetime, os, os.path, shutil, math, random, argparse, logging. Introduzione al primo assignment.
@@ -15,11 +22,21 @@
 \item 21/10/2019 - lezione: Correttezza di un programma: unit test ed analisi statica della sintassi. Il modulo unittest di Python. pylint e pyflakes. Documentazione: docstrings e sphinx; readthedocs. Continuous integration.
 \item 21/10/2019 - esercitazione: Creazione di un pacchetto Python. Layout, unit test e documentazione. Continuous integration con Travis CI e documentazione con readthedocs.
 \item 28/10/2019 - esercitazione: Di nuovo sugli strumenti di lavoro: setup del repositorio, continuous integration e documentazione.
+\end{itemize}
+
+\modulo{Parallel computation}
+
+\begin{itemize}[resume]
 \item 04/11/2019 - lezione: Architettura di Von Neumann. Instruction Level Parallelism: processori superscalari, vettorializzazione e pipelining. Leggi di scaling di Dennard e Moore. Parallelismo a livello di task. Tassonomia di Flynn. Esecuzione concorrenziale. Differenza tra programmazione concurrent e parallelismo. Definizione di Speedup. Legge di Amdhal e legge di Gustafson.
 \item 04/11/2019 - esercitazione: Multithreading e Multiprocessing in Python. Vari esempi sull'uso del modulo di multiprocessing: lancio, pool, queue, comunicazione tra processi, sincronizzazione tra processi. Modulo Threading. Confronto tra processi e threads su 2,4,8 processori e confronto con implementazione seriale per un problema di fattorizzazione.
 \item 07/11/2019 - lezione: Riassunto su necessità e limiti del calcolo parallelo. Introduzione sulle GPU. Definizione della metrica sulla potenza di calcolo. Confronto CPU vs GPU: ambiti di applicazioni e differenze architetturali. Calcolo eterogeneo. Introduzione al modello di programmazione basato su CUDA (nvidia). Cenno sull'utilizzo delle librerie e delle direttive al preprocessore. Esempi sulla struttura di un programma host-device in cuda.
 \item 11/11/2019 - lezione: Esempi pratici di scrittura di kernel GPU. Somma di vettori come esempio per la gestione delle risorse di parallelizzazione. Moltiplicazione di matrici come esempio sull'utilizzazione della memoria condivisa (shared memory) del blocco per diminuire le richieste alla moemria principale. Sincronizzazione di threads. Coalescenza della lettura della memoria e come sfruttarla per l'ottimizzazione della larghezza di banda.
 \item 11/11/2019 - esercitazione: Introduzione all'uso del modulo pyCUDA. Esercitazione Hands-on: Utilizzo del notebook Jupyter per implementare alcuni esempi sull'uso di GPU in python (attraverso colaboratory). Metodi per l'import di kernel C-CUDA in programmi python. Proposta di kernel per alcune problematiche diffuse della programmazione parallela: Istogrammi e introduzione alle funzioni atomiche; Parallel reduction utilizzando la shared memory e la sincronizzazione; Stencil (convolution) e concetto del filtro con maschera di convoluzione.
+\end{itemize}
+
+\modulo{Machine learning}
+
+\begin{itemize}[resume]
 \item 14/11/2019 - lezione: Introduzione al Machine Learning. Concetti fondamentali: function approximation, model, hyper-parameters, parameters, objective function, generalization,regularization. Examples: linear regression and decision trees (bagging vs boosting). Historical introduction to neural networks.
 \item 21/11/2019 - lezione: Artificial neural network, the Multi Layer Perceptron, universal approximation theorem, gradient descent techniques. Deep FF networks, regularization with dropout. Convolutional networks, pooling layers. Autoencoders. Transfer learning. Keras toolset. Example of simple keras DNN on colab.
 \end{itemize}

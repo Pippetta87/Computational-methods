@@ -54,6 +54,7 @@
 %%% COUNTERS
 \newcounter{cherrykey}%conta le keyword totali per auto ref
 \newcounter{cherrysectionlist}% conta le key prima di keywordlist
+\newcounter{moduli}%conta i moduli per subsection in toc of reglez
 
 \newcommand\headinginfo[1]{%
   \addcontentsline{key-\thecherrysectionlist}{heading}{{#1}}%
@@ -68,6 +69,15 @@
 \phantomsection% comment out if hyperref is not used
   \linkdest{#1}%
 \addcontentsline{key-\thecherrysectionlist}{subsubsection}{\textbullet\protect\hyperlink{#1}{#2}}%
+}
+\newcommand\modulo[2][target-\themoduli]{%
+\addtocounter{moduli}{1}
+\noindent{%
+\color{modulo}{#2}%
+}%
+\phantomsection% comment out if hyperref is not used
+  \linkdest{#1}%
+\addcontentsline{key-\thecherrysectionlist}{subsection}{\par{--\protect\hyperlink{#1}{#2}--}\hspace{0pt} \\}%
 }
 \makeatother
   
