@@ -33,7 +33,7 @@
 \definecolor{keyword}{rgb}{0.25, 0.25, 0.28}
 \definecolor{coolgrey}{rgb}{0.55, 0.57, 0.67}
 \definecolor{modulo}{rgb}{0.8, 0.0, 0.0}
-
+\definecolor{pycmd}{rgb}{1.0, 0.75, 0.0}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% importa pacchetti
 \usepackage{usepkg}
 %%
@@ -92,12 +92,16 @@
 \begin{frame}{TOC}
 \tableofcontents[onlyparts]
 \end{frame}
+\begin{frame}{Python command}
+\listofpycmds
+\end{frame}
 % Section and subsections will appear in the presentation overview
 % and table of contents.
 %\frame{\tableofcontents[onlyparts]}
 
 \part{Intro}\linkdest{intro}
 \subfile{intro}
+\subfile{reg}
 
 \part{Succo}\linkdest{succo}
 \subfile{succo}

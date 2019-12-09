@@ -54,7 +54,8 @@
 %%% COUNTERS
 \newcounter{cherrykey}%conta le keyword totali per auto ref
 \newcounter{cherrysectionlist}% conta le key prima di keywordlist
-\newcounter{moduli}%conta i moduli per subsection in toc of reglez
+\newcounter{modulo}%conta i moduli per subsection in toc of reglez
+\newcounter{pycmd}%conta i comandi Python per list of Py command
 
 \newcommand\headinginfo[1]{%
   \addcontentsline{key-\thecherrysectionlist}{heading}{{#1}}%
@@ -69,15 +70,24 @@
 \phantomsection% comment out if hyperref is not used
   \linkdest{#1}%
 \addcontentsline{key-\thecherrysectionlist}{subsubsection}{\textbullet\protect\hyperlink{#1}{#2}}%
-}
-\newcommand\modulo[2][target-\themoduli]{%
-\addtocounter{moduli}{1}
+}%
+\newcommand\modulo[2][modulo-\themodulo]{%
+\addtocounter{modulo}{1}
 \noindent{%
 \color{modulo}{#2}%
 }%
 \phantomsection% comment out if hyperref is not used
   \linkdest{#1}%
-\addcontentsline{key-\thecherrysectionlist}{subsection}{\par{--\protect\hyperlink{#1}{#2}--}\hspace{0pt} \\}%
+\addcontentsline{moduli}{subsection}{\par{--\protect\hyperlink{#1}{#2}--}\hspace{0pt} \\}%
+}
+\newcommand\pycmd[2][pycmd-\thepycmd]{%
+\addtocounter{pycmd}{1}
+\noindent{%
+\color{pycmd}{#2}%
+}%
+\phantomsection% comment out if hyperref is not used
+  \linkdest{#1}%
+\addcontentsline{pycmds}{subsubsection}{\textbullet\protect\hyperlink{#1}{#2}}%
 }
 \makeatother
   
@@ -85,14 +95,23 @@
 \newcommand{\listofkeywordsbasic}{%
   \@starttocorig{key-\thecherrysectionlist}
 }
+\newcommand{\listofmodulibasic}{%
+  \@starttocorig{moduli}
+}
+\newcommand{\listofpycmdsbasic}{%
+  \@starttocorig{pycmds}
+}
 %%frameintoc
 \newcommand\listofframes{\@starttoc{lbf}}
 \newcommand\listofframesname{List of keywords}
 \makeatother
 
-\newcommand\listkeywordsname{KEYWORDS}
+\newcommand\listkeywordsname{KEYWORDS}%Defining listofkeywords
 \newcommand\listofkeywords{%
-\subsubsection{\listkeywordsname}\listofkeywordsbasic}
+\subsubsection{\listkeywordsname}\listofkeywordsbasic}%
+\newcommand\listpycmdsname{Python Commands}
+\newcommand\listofpycmds{%
+\subsubsection{\listpycmdsname}\listofpycmdsbasic}
 %%frameintoc
 \newcommand\frameintoc{%
 %\subsubsection{\insertframetitle}
