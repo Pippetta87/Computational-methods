@@ -9,7 +9,9 @@
 \subsection{NumPy}
 
 \begin{frame}[fragile]{Stack}
-\begin{lstlisting}[language=Python]
+\begin{columns}[T]
+\begin{column}{0.5\textwidth}
+\begin{lstlisting}[language=Python,basicstyle=\Tiny]
 >>> a = np.array((1,2,3))
 >>> b = np.array((2,3,4))
 >>> np.hstack((a,b))
@@ -21,6 +23,15 @@ array([[1, 2],
        [2, 3],
        [3, 4]])
 \end{lstlisting}
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{lstlisting}[language=Python,basicstyle=\Tiny]
+>>> arrays = [np.random.randn(3, 4) for _ in range(10)]
+>>> np.stack(arrays, axis=0).shape
+(10, 3, 4)
+\end{lstlisting}
+\end{column}
+\end{columns}
 \end{frame}
 
 \end{document}
